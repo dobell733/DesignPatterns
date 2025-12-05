@@ -1,15 +1,6 @@
 ﻿namespace AbstractFactory
 {
     /// <summary>
-    /// AbstractFactory
-    /// </summary>
-    public interface IShoppingCartPurchaseFactory
-    {
-        IDiscountService CreateDiscountService();
-        IShippingCostsService CreateShippingCostsService();
-    }
-
-    /// <summary>
     ///  AbstractProduct
     /// </summary>
     public interface IDiscountService
@@ -58,6 +49,14 @@
         public decimal ShippingCosts => 25;
     }
 
+    /// <summary>
+    /// AbstractFactory
+    /// </summary>
+    public interface IShoppingCartPurchaseFactory
+    {
+        IDiscountService CreateDiscountService();
+        IShippingCostsService CreateShippingCostsService();
+    }
 
     /// <summary>
     /// ConcreteFactory

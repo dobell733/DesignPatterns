@@ -2,8 +2,10 @@
 
 Console.Title = "Observer";
 
+// create observers
 TicketStockService ticketStockService = new();
 TicketResellerService ticketResellerService = new();
+// create subject
 OrderService orderService = new();
 
 // add two observers

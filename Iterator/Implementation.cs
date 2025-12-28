@@ -47,49 +47,29 @@
     /// </summary>
     public class PeopleIterator : IPeopleIterator
     {
-        private PeopleCollection _peopleCollection;
-        private int _current = 0;
+        private readonly List<Person> _sorted;
+        private int _current;
 
-        public PeopleIterator(PeopleCollection collection)
+        public PeopleIterator(IEnumerable<Person> collection)
         {
-            _peopleCollection = collection;
+            _sorted = collection.OrderBy(p => p.Name).ToList();
+            _current = 0;
         }
 
-        public bool IsDone
-        {
-            get { return _current >= _peopleCollection.Count; }
-        }
+        public bool IsDone => _current >= _sorted.Count;
 
-
-        public Person CurrentItem
-        {
-            get
-            {
-                return _peopleCollection
-                  .OrderBy(p => p.Name).ToList()[_current];
-            }
-        }
-
+        public Person CurrentItem => IsDone ? null : _sorted[_current];
 
         public Person First()
         {
             _current = 0;
-            return _peopleCollection
-                .OrderBy(p => p.Name).ToList()[_current];
+            return CurrentItem;
         }
 
         public Person Next()
         {
             _current++;
-            if (!IsDone)
-            {
-                return _peopleCollection
-                    .OrderBy(p => p.Name).ToList()[_current];
-            }
-            else
-            {
-                return null;
-            }
+            return CurrentItem;
         }
     }
 }
